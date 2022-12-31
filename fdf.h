@@ -6,7 +6,7 @@
 /*   By: hahadiou <hahadiou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 14:25:35 by hahadiou          #+#    #+#             */
-/*   Updated: 2022/12/30 19:48:17 by hahadiou         ###   ########.fr       */
+/*   Updated: 2022/12/31 01:29:09 by hahadiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,20 @@ typedef struct s_canvas	t_canvas;
 typedef struct s_point	t_point;
 typedef struct s_cam	t_cam;
 typedef struct s_map	t_map;
+typedef struct s_vectors	t_vectors;
 
 struct					s_point
 {
 	double				x;
 	double				y;
 	double				z;
+};
+
+struct					s_vectors
+{
+	t_point				ex;
+	t_point				ey;
+	t_point				ez;
 };
 
 struct					s_canvas
@@ -75,6 +83,7 @@ struct					s_cam
 	float				fy;
 	t_point				tr;
 	t_point				ro;
+	t_vectors			v;
 	t_point				**coords;
 };
 
@@ -101,5 +110,6 @@ void					init(t_data *, char **, int);
 void					paint_pxl(t_canvas *canvas, int x, int y, int color);
 void					register_events(t_data *data);
 t_map					process_map(char *map_path);
+t_vectors					calculate_vectors(t_data *, t_vectors);
 
 #endif

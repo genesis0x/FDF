@@ -6,11 +6,13 @@
 /*   By: hahadiou <hahadiou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 22:42:25 by hahadiou          #+#    #+#             */
-/*   Updated: 2022/12/30 20:30:16 by hahadiou         ###   ########.fr       */
+/*   Updated: 2022/12/31 01:30:57 by hahadiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <stddef.h>
+#include <sys/_types/_size_t.h>
 
 int	key_handler(int key, t_data *data)
 {
@@ -47,6 +49,7 @@ void	get_coords(t_data *data)
 	t_cam	*cam;
 	t_map	*map;
 	t_point	p;
+	t_vectors	v;
 
 	size_t x, y;
 	double _teta, _phi, ru, r, z;
@@ -57,6 +60,8 @@ void	get_coords(t_data *data)
 	while (++x < map->h)
 		cam->coords[x] = malloc(map->w * sizeof(t_point));
 	x = -1;
+	v.ex.x = 0;
+	v = calculate_vectors(data, v);
 	printf("%zu, %zu\n", map->w, map->h);
 	while (++x < map->w)
 	{
@@ -74,9 +79,13 @@ void	get_coords(t_data *data)
 			else
 				_phi = atan((double)y / (double)x) + cam->alpha;
 			ru = r * cos(_teta);
-			cam->coords[y][x] = (t_point){.x = ru * cos(_phi),
+			/*cam->coords[y][x] = (t_point){.x = ru * cos(_phi),
 											.y = ru * sin(_phi),
-											.z = r * sin(_teta)};
+											.z = r * sin(_teta)};*/
+			//cam->coords[y][x] = (t_point) {.x = }
+			cam->coords[y][x] = (t_point) {.x = x * v.ex.x + y * v.ey.x + z * v.ez.x + cam->tr.x, 
+									.y = x * v.ex.y + y * v.ey.y + z * v.ez.y + cam->tr.y,
+									.z = x * v.ex.z + y * v.ey.z + z * v.ez.z + cam->tr.z};
 			p = cam->coords[y][x];
 			printf("phi: %f \t- teta: %f \t- r: %f  ", _phi, _teta, r);
 			printf("{%zu, %zu, %.0f} => {%f, %f, %f}\n", x, y, z, p.x, p.y,
@@ -85,13 +94,10 @@ void	get_coords(t_data *data)
 	}
 }
 
-void	calculate_vectors(t_data *data)
+t_vectors	calculate_vectors(t_data *data, t_vectors v)
 {
 	t_point	c;
 	t_point	s;
-	t_point	ex;
-	t_point	ey;
-	t_point	ez;
 
 	/*Calculate the sin and cos to avoid calculate them every time */
 	c.x = cos(data->main.cam.ro.x);
@@ -101,17 +107,22 @@ void	calculate_vectors(t_data *data)
 	s.y = cos(data->main.cam.ro.y);
 	s.z = cos(data->main.cam.ro.z);
 	/* calcul ex */
-	ex.x = c.y * c.x;
-	ex.y = -c.y * s.x;
-	ex.z = s.y;
+	v.ex.x = c.y * c.x;
+	v.ex.y = -c.y * s.x;
+	v.ex.z = s.y;
 	/* calcul ey*/
-	ey.x = c.z * s.x + s.z * s.y * c.x;
-	ey.y = c.z * c.x - s.z * s.y * s.x;
-	ey.z = -s.z * s.y;
+	v.ey.x = c.z * s.x + s.z * s.y * c.x;
+	v.ey.y = c.z * c.x - s.z * s.y * s.x;
+	v.ey.z = -s.z * s.y;
 	/* calcul ez*/
-	ez.x = s.z * s.x - c.z * s.y * s.x;
-	ez.y = s.z * c.x + c.z * s.y * s.x;
-	ez.z = c.z * c.y;
+	v.ez.x = s.z * s.x - c.z * s.y * s.x;
+	v.ez.y = s.z * c.x + c.z * s.y * s.x;
+	v.ez.z = c.z * c.y;
+	/* calcul coords */
+	// data->cam.coords[y][x] = (t_point) {.x = x * v->ex.x + y * ey.x + z * ez.x + tr.x, 
+	// 								.y = x * ex.y + y * ey.y + z * ez.y + tr.y,
+	// 								.z = x * ex.z + y * ey.z + z * ez.z + tr.z};
+	return (v);
 }
 
 void	init(t_data *data, char **v, int c)
