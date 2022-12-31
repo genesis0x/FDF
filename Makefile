@@ -31,7 +31,7 @@ ${NAME}:	${OBJS}
 			@echo "$(GREEN)$(NAME) created[0m ✔️"
 
 run:
-			make re && ./fdf
+			@clear && make re && ./fdf
 
 clean:
 			@ ${RM} *.o

@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process_map.c                                      :+:      :+:    :+:   */
+/*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hahadiou <hahadiou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:12:52 by hahadiou          #+#    #+#             */
-/*   Updated: 2022/12/30 16:24:08 by hahadiou         ###   ########.fr       */
+/*   Updated: 2022/12/31 16:08:45 by hahadiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
 int	is_valid_map(char *map_path, t_map *map)
 {
 	int		fd;
@@ -58,7 +59,7 @@ void	build_map(char *map_path, t_map *map)
 	close(fd);
 }
 
-t_map	process_map(char *map_path)
+t_map	parse_map(char *map_path)
 {
 	t_map	map;
 

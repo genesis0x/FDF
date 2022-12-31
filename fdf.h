@@ -6,7 +6,7 @@
 /*   By: hahadiou <hahadiou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 14:25:35 by hahadiou          #+#    #+#             */
-/*   Updated: 2022/12/31 01:29:09 by hahadiou         ###   ########.fr       */
+/*   Updated: 2022/12/31 16:12:14 by hahadiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,16 +100,15 @@ struct					s_main
 struct					s_data
 {
 	t_point				*p;
-	int					w;
 	void				*mlx;
 	void				*win;
 	t_main				main;
 };
 
-void					init(t_data *, char **, int);
+void					init(t_data *, int, char **);
 void					paint_pxl(t_canvas *canvas, int x, int y, int color);
 void					register_events(t_data *data);
-t_map					process_map(char *map_path);
-t_vectors					calculate_vectors(t_data *, t_vectors);
+t_map					parse_map(char *map_path);
+t_vectors				calculate_vectors(t_data *);
 
 #endif
