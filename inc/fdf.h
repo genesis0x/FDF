@@ -6,7 +6,7 @@
 /*   By: hahadiou <hahadiou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 14:25:35 by hahadiou          #+#    #+#             */
-/*   Updated: 2022/12/31 17:28:48 by hahadiou         ###   ########.fr       */
+/*   Updated: 2022/12/31 18:00:18 by hahadiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,5 +111,7 @@ void					register_events(t_data *data);
 t_map					parse_map(char *map_path);
 t_vectors				calculate_vectors(t_data *);
 void					register_events(t_data *data);
-
+int						is_valid_map(char *map_path, t_map *map);
+void					build_map(char *map_path, t_map *map);
+t_map					parse_map(char *map_path);
 #endif

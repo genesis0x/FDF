@@ -1,34 +1,32 @@
-NAME        :=  fdf
+NAME        =  fdf
 
-CC        := gcc
-FLAGS    := -Wall -Wextra -Werror -Iinc -Ilibft 
+CC        = gcc
+FLAGS    = -Wall -Wextra -Werror -Iinc -Ilibft 
 
 inc			= ./inc/fdf.h
 
-SRCS        := 		src/main.c \
+SRCS        = 		src/main.c \
 						src/init.c \
 						src/parse_map.c \
 						src/put_pixel.c \
 						src/transform_ref.c \
 						src/utils.c \
 						libft/get_next_line.c \
-						libft/get_next_line_utils.c \
-						src/parse_map.c
+						libft/get_next_line_utils.c 
 
 
-OBJS        := $(SRCS:.c=.o)
+OBJS        = $(SRCS:.c=.o)
 
-.c.o: ${inc}
-	mkdir -p ${@D}
+.c.o: 
 	@${CC} ${FLAGS} -c $< -o ${<:.c=.o}
 
-CLR_RMV		:= \033[0m
-RED		    := \033[1;31m
-GREEN		:= \033[1;32m
-YELLOW		:= \033[1;33m
-BLUE		:= \033[1;34m
-CYAN 		:= \033[1;36m
-RM		    := rm -f
+CLR_RMV		= \033[0m
+RED		    = \033[1;31m
+GREEN		= \033[1;32m
+YELLOW		= \033[1;33m
+BLUE		= \033[1;34m
+CYAN 		= \033[1;36m
+RM		    = rm -f
 all:		${NAME}
 
 ${NAME}:	${OBJS}
@@ -40,7 +38,7 @@ run:
 			@clear && make re && ./fdf
 
 clean:
-			@ ${RM} src/*.o
+			@ ${RM} ${OBJS}
 			@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)OBJS ✔️"
 
 fclean:		clean
