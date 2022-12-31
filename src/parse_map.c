@@ -6,11 +6,11 @@
 /*   By: hahadiou <hahadiou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:12:52 by hahadiou          #+#    #+#             */
-/*   Updated: 2022/12/31 16:08:45 by hahadiou         ###   ########.fr       */
+/*   Updated: 2022/12/31 17:26:26 by hahadiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../inc/fdf.h"
 
 int	is_valid_map(char *map_path, t_map *map)
 {

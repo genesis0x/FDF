@@ -6,11 +6,11 @@
 /*   By: hahadiou <hahadiou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 16:01:28 by hahadiou          #+#    #+#             */
-/*   Updated: 2022/12/31 16:07:44 by hahadiou         ###   ########.fr       */
+/*   Updated: 2022/12/31 17:26:35 by hahadiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../inc/fdf.h"
 
 t_vectors	calculate_vectors(t_data *data)
 {

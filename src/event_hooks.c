@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   event_hooks.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hahadiou <hahadiou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/15 21:41:44 by hahadiou          #+#    #+#             */
-/*   Updated: 2022/12/31 16:40:38 by hahadiou         ###   ########.fr       */
+/*   Created: 2022/12/31 15:58:23 by hahadiou          #+#    #+#             */
+/*   Updated: 2022/12/31 17:26:10 by hahadiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../inc/fdf.h"
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+int	key_handler(int key, t_data *data)
 {
-	unsigned char	*in_dst;
-	unsigned char	*in_src;
-
-	if (!dst && !src)
-		return (NULL);
-	in_dst = (unsigned char *)dst;
-	in_src = (unsigned char *)src;
-	while (n-- > 0)
-		*in_dst++ = *in_src++;
-	return (dst);
+	if (key == 53)
+	{
+		mlx_destroy_window(data->mlx, data->win);
+		exit(0);
+	}
+	return (0);
 }
 
-void	free_buffer(t_read *prb)
+void	register_events(t_data *data)
 {
-	if (prb->buf != NULL)
-	{
-		free(prb->buf);
-		prb->buf = NULL;
-	}
+	mlx_hook(data->win, ON_KEYDOWN, 0, key_handler, data);
+	// key down event => esc case
 }

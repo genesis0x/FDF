@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   event_hooks.c                                      :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hahadiou <hahadiou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/31 15:58:23 by hahadiou          #+#    #+#             */
-/*   Updated: 2022/12/31 15:59:20 by hahadiou         ###   ########.fr       */
+/*   Created: 2022/09/30 11:45:08 by hahadiou          #+#    #+#             */
+/*   Updated: 2022/12/31 16:35:09 by hahadiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "libft.h"
 
-int	key_handler(int key, t_data *data)
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	if (key == 53)
-	{
-		mlx_destroy_window(data->mlx, data->win);
-		exit(0);
-	}
-	return (0);
-}
+	size_t	len;
 
-void	register_events(t_data *data)
-{
-	mlx_hook(data->win, ON_KEYDOWN, 0, key_handler, data);
-	// key down event => esc case
+	if (!s1 || !set)
+		return (NULL);
+	while (*s1 && ft_strchr(set, *s1))
+		s1++;
+	s1 -= 1;
+	len = ft_strlen(s1);
+	while (len-- && ft_strchr(set, s1[len]))
+		;
+	len -= 1;
+	return (ft_substr(s1, 0, len + 1));
 }

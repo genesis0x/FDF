@@ -1,36 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   ft_dprintf.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hahadiou <hahadiou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/15 21:41:44 by hahadiou          #+#    #+#             */
-/*   Updated: 2022/12/31 16:40:38 by hahadiou         ###   ########.fr       */
+/*   Created: 2022/12/31 17:00:29 by hahadiou          #+#    #+#             */
+/*   Updated: 2022/12/31 17:09:57 by hahadiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+void	ft_putchar_fd(int fd, char c)
 {
-	unsigned char	*in_dst;
-	unsigned char	*in_src;
-
-	if (!dst && !src)
-		return (NULL);
-	in_dst = (unsigned char *)dst;
-	in_src = (unsigned char *)src;
-	while (n-- > 0)
-		*in_dst++ = *in_src++;
-	return (dst);
+	write(fd, &c, 1);
 }
 
-void	free_buffer(t_read *prb)
+void	ft_putstr(int fd, char *s)
 {
-	if (prb->buf != NULL)
+	int	i;
+
+	i = -1;
+	if (s == NULL)
+		ft_putstr(fd, "(null)");
+	while (s[++i])
+		write(fd, &s[i], 1);
+}
+
+void	ft_dprintf(int fd, char *s, ...)
+{
+	va_list	ap;
+	int		i;
+
+	i = -1;
+	va_start(ap, s);
+	while (s[++i])
 	{
-		free(prb->buf);
-		prb->buf = NULL;
+		if (s[i] == '%')
+		{
+			if (s[++i] == 's')
+				ft_putstr(fd, va_arg(ap, char *));
+		}
+		else
+			ft_putchar_fd(fd, s[i]);
 	}
+	va_end(ap);
 }

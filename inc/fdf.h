@@ -6,7 +6,7 @@
 /*   By: hahadiou <hahadiou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 14:25:35 by hahadiou          #+#    #+#             */
-/*   Updated: 2022/12/31 16:12:14 by hahadiou         ###   ########.fr       */
+/*   Updated: 2022/12/31 17:28:48 by hahadiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define FDF_H
 
 # include "config.h"
-# include "libft/get_next_line.h"
+# include "../libft/libft.h"
 # include <fcntl.h>
 # include <math.h>
 # include <mlx.h>
@@ -110,5 +110,6 @@ void					paint_pxl(t_canvas *canvas, int x, int y, int color);
 void					register_events(t_data *data);
 t_map					parse_map(char *map_path);
 t_vectors				calculate_vectors(t_data *);
+void					register_events(t_data *data);
 
 #endif

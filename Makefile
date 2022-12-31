@@ -1,19 +1,25 @@
 NAME        :=  fdf
 
 CC        := gcc
-FLAGS    := -Wall -Wextra -Werror
+FLAGS    := -Wall -Wextra -Werror -Iinc -Ilibft 
 
-SRCS        := fdf.c \
-				put_pixel.c \
-				main.c \
-				libft/get_next_line.c \
-				libft/get_next_line_utils.c \
-				parse_map.c
+inc			= ./inc/fdf.h
+
+SRCS        := 		src/main.c \
+						src/init.c \
+						src/parse_map.c \
+						src/put_pixel.c \
+						src/transform_ref.c \
+						src/utils.c \
+						libft/get_next_line.c \
+						libft/get_next_line_utils.c \
+						src/parse_map.c
 
 
 OBJS        := $(SRCS:.c=.o)
 
-.c.o:
+.c.o: ${inc}
+	mkdir -p ${@D}
 	@${CC} ${FLAGS} -c $< -o ${<:.c=.o}
 
 CLR_RMV		:= \033[0m
@@ -34,7 +40,7 @@ run:
 			@clear && make re && ./fdf
 
 clean:
-			@ ${RM} *.o
+			@ ${RM} src/*.o
 			@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)OBJS ✔️"
 
 fclean:		clean

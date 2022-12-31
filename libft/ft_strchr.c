@@ -1,36 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hahadiou <hahadiou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/15 21:41:44 by hahadiou          #+#    #+#             */
-/*   Updated: 2022/12/31 16:40:38 by hahadiou         ###   ########.fr       */
+/*   Created: 2022/09/29 15:06:41 by hahadiou          #+#    #+#             */
+/*   Updated: 2022/10/22 11:59:03 by hahadiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+char	*ft_strchr(const char *s, int c)
 {
-	unsigned char	*in_dst;
-	unsigned char	*in_src;
+	int	i;
 
-	if (!dst && !src)
-		return (NULL);
-	in_dst = (unsigned char *)dst;
-	in_src = (unsigned char *)src;
-	while (n-- > 0)
-		*in_dst++ = *in_src++;
-	return (dst);
-}
-
-void	free_buffer(t_read *prb)
-{
-	if (prb->buf != NULL)
-	{
-		free(prb->buf);
-		prb->buf = NULL;
-	}
+	i = 0;
+	while (s[i] && s[i] != (char)c)
+		i++;
+	if (s[i] == (char)c)
+		return ((char *)s + i);
+	return (NULL);
 }

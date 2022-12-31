@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_pixel.c                                        :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hahadiou <hahadiou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hahadiou <hahadiou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/23 20:09:23 by hahadiou          #+#    #+#             */
-/*   Updated: 2022/12/24 16:18:55 by hahadiou         ###   ########.fr       */
+/*   Created: 2022/09/29 15:41:24 by hahadiou          #+#    #+#             */
+/*   Updated: 2022/09/29 15:41:25 by hahadiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "libft.h"
 
-void	paint_pxl(t_canvas *canvas, int x, int y, int color)
+char	*ft_strcpy(char *dest, const char *src)
 {
-	char	*dst;
+	size_t	i;
 
-	dst = canvas->addr + (y * canvas->line_len + x * (canvas->bpp / 8));
-	*(unsigned int *)dst = color;
+	i = 0;
+	while (src[i])
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }

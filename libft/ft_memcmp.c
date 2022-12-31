@@ -1,36 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hahadiou <hahadiou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/15 21:41:44 by hahadiou          #+#    #+#             */
-/*   Updated: 2022/12/31 16:40:38 by hahadiou         ###   ########.fr       */
+/*   Created: 2022/09/29 17:48:12 by hahadiou          #+#    #+#             */
+/*   Updated: 2022/12/31 17:09:33 by hahadiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	unsigned char	*in_dst;
-	unsigned char	*in_src;
+	size_t			i;
+	unsigned char	*p;
+	unsigned char	*b;
 
-	if (!dst && !src)
-		return (NULL);
-	in_dst = (unsigned char *)dst;
-	in_src = (unsigned char *)src;
-	while (n-- > 0)
-		*in_dst++ = *in_src++;
-	return (dst);
-}
-
-void	free_buffer(t_read *prb)
-{
-	if (prb->buf != NULL)
-	{
-		free(prb->buf);
-		prb->buf = NULL;
-	}
+	p = (unsigned char *)s1;
+	b = (unsigned char *)s2;
+	if (!p && !b)
+		return (0);
+	i = -1;
+	while (++i < n)
+		if (p[i] != b[i])
+			return (p[i] - b[i]);
+	return (0);
 }

@@ -6,11 +6,11 @@
 /*   By: hahadiou <hahadiou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 22:42:25 by hahadiou          #+#    #+#             */
-/*   Updated: 2022/12/31 16:14:38 by hahadiou         ###   ########.fr       */
+/*   Updated: 2022/12/31 17:26:56 by hahadiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../inc/fdf.h"
 
 void	init_canvas(void *mlx, t_canvas *c)
 {
@@ -32,7 +32,7 @@ int	init_cam_coords(t_data *data)
 {
 	t_cam	*cam;
 	t_map	*map;
-	t_point	p;
+	//t_point	p;
 	size_t	x;
 	
 	map = &data->main.map;

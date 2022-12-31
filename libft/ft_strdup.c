@@ -1,44 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hahadiou <hahadiou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/23 19:06:10 by hahadiou          #+#    #+#             */
-/*   Updated: 2022/12/30 18:03:18 by hahadiou         ###   ########.fr       */
+/*   Created: 2022/09/29 15:41:31 by hahadiou          #+#    #+#             */
+/*   Updated: 2022/12/10 01:29:18 by hahadiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "libft.h"
 
-void	calc_transformed_coords(t_data *data)
+char	*ft_strdup(const char *s1)
 {
-	size_t	i;
-	size_t	j;
+	void	*s2;
+	size_t	len;
 
-	j = -1;
-	while (++j < data->main.map.h)
-	{
-		i = -1;
-		while (++i < data->main.map.w)
-		{
-			return ;
-		}
-	}
-}
-
-void	start_fdf(t_data *data)
-{
-	calc_transformed_coords(data);
-}
-
-int	main(void)
-{
-	t_data	data;
-
-	init(&data, 0, 0);
-	register_events(&data);
-	start_fdf(&data);
-	return (0);
+	len = ft_strlen(s1) + 1;
+	s2 = malloc(len);
+	if (!s2)
+		return (0);
+	ft_memcpy(s2, s1, len);
+	return (s2);
 }

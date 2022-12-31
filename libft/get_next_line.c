@@ -6,11 +6,11 @@
 /*   By: hahadiou <hahadiou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 21:41:47 by hahadiou          #+#    #+#             */
-/*   Updated: 2022/12/18 00:32:42 by hahadiou         ###   ########.fr       */
+/*   Updated: 2022/12/31 16:41:46 by hahadiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
 static char	*ft_realloc(t_line *line)
 {
@@ -65,7 +65,7 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || read(fd, line.buf, 0) < 0)
 		return (0);
-	line.buf = 0;
+	line.buf = NULL;
 	line.pos = 0;
 	line.size = 0;
 	while (1)

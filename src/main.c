@@ -1,36 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hahadiou <hahadiou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/15 21:41:44 by hahadiou          #+#    #+#             */
-/*   Updated: 2022/12/31 16:40:38 by hahadiou         ###   ########.fr       */
+/*   Created: 2022/12/23 19:06:10 by hahadiou          #+#    #+#             */
+/*   Updated: 2022/12/31 17:49:38 by hahadiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../inc/fdf.h"
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+void	calc_transformed_coords(t_data *data)
 {
-	unsigned char	*in_dst;
-	unsigned char	*in_src;
+	size_t	i;
+	size_t	j;
 
-	if (!dst && !src)
-		return (NULL);
-	in_dst = (unsigned char *)dst;
-	in_src = (unsigned char *)src;
-	while (n-- > 0)
-		*in_dst++ = *in_src++;
-	return (dst);
+	j = -1;
+	while (++j < data->main.map.h)
+	{
+		i = -1;
+		while (++i < data->main.map.w)
+		{
+			return ;
+		}
+	}
 }
 
-void	free_buffer(t_read *prb)
+void	start_fdf(t_data *data)
 {
-	if (prb->buf != NULL)
-	{
-		free(prb->buf);
-		prb->buf = NULL;
-	}
+	calc_transformed_coords(data);
+}
+
+int	main(void)
+{
+	t_data	data;
+
+	init(&data, 0, 0);
+	//register_events(&data);
+	start_fdf(&data);
+	return (0);
 }
