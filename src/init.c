@@ -21,7 +21,7 @@ void	init_canvas(void *mlx, t_canvas *c)
 
 int	init_map(t_data *data)
 {
-	data->main.map_path = "map.fdf";//strdup(argv[1]);
+	data->main.map_path = "map.fdf"; //strdup(argv[1]);
 	data->main.map = parse_map(data->main.map_path);
 	if (data->main.map.coords)
 		return (0);
@@ -32,9 +32,9 @@ int	init_cam_coords(t_data *data)
 {
 	t_cam	*cam;
 	t_map	*map;
-	//t_point	p;
 	size_t	x;
-	
+
+	//t_point	p;
 	map = &data->main.map;
 	cam = &data->main.cam;
 	x = -1;
@@ -46,7 +46,7 @@ int	init_cam_coords(t_data *data)
 		cam->coords[x] = malloc(map->w * sizeof(t_point));
 		if (cam->coords[x] == NULL)
 		{
-			// free up to x and return null;
+			// free up to x and return (null);
 			return (1);
 		}
 	}
@@ -62,7 +62,7 @@ void	init(t_data *data, int argc, char **argv)
 		// map error;
 		exit(1);
 	}
-	if(init_cam_coords(data))
+	if (init_cam_coords(data))
 	{
 		// free map data->main.map?
 		// printf "ALLOCATION ERROR\n";
@@ -81,5 +81,5 @@ void	init(t_data *data, int argc, char **argv)
 	data->main.canvas.h = H;
 	init_canvas(data->mlx, &data->main.canvas);
 	data->main.cam.tr = (t_point){.x = 0, .y = 0, .z = 0};
-	data->main.cam.ro = (t_point){.x = - M_PI_4, .y = 0, .z = 0};
+	data->main.cam.ro = (t_point){.x = -M_PI_4, .y = 0, .z = 0};
 }
