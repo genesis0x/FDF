@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: hahadiou <hahadiou@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/01/02 17:11:56 by hahadiou          #+#    #+#              #
+#    Updated: 2023/01/02 18:36:02 by hahadiou         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME        =  fdf
 
 CC        = gcc
@@ -5,15 +17,14 @@ FLAGS    = -Wall -Wextra -Werror -Iinc -Ilibft
 
 inc			= ./inc/fdf.h
 
+LIBFT		= libft/libft.a
+
 SRCS        = 		src/main.c \
 						src/init.c \
 						src/parse_map.c \
 						src/put_pixel.c \
 						src/transform_ref.c \
 						src/utils.c \
-						libft/get_next_line.c \
-						libft/get_next_line_utils.c 
-
 
 OBJS        = $(SRCS:.c=.o)
 
@@ -27,11 +38,12 @@ YELLOW		= \033[1;33m
 BLUE		= \033[1;34m
 CYAN 		= \033[1;36m
 RM		    = rm -f
+
 all:		${NAME}
 
 ${NAME}:	${OBJS}
 			@echo "$(GREEN)Compilation ${CLR_RMV}of ${YELLOW}$(NAME) ${CLR_RMV}..."
-			@${CC} ${OBJS}   -lmlx -framework OpenGL -framework AppKit -o ${NAME}
+			@${CC} ${OBJS}  ${LIBFT} -lmlx -framework OpenGL -framework AppKit -o ${NAME}
 			@echo "$(GREEN)$(NAME) created[0m ✔️"
 
 run:
