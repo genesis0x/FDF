@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysalmi <ysalmi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hahadiou <hahadiou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 14:25:35 by hahadiou          #+#    #+#             */
-/*   Updated: 2023/01/04 16:25:00 by ysalmi           ###   ########.fr       */
+/*   Updated: 2023/01/06 15:33:44 by hahadiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,14 +105,16 @@ struct						s_data
 	t_main					main;
 };
 
-void		init(t_data *d, int i, char **v);
-void		paint_pxl(t_canvas *canvas, int x, int y, int color);
-void		register_events(t_data *data);
-t_map		parse_map(char *map_path);
-t_vectors	calculate_vectors(t_data *d);
-void		register_events(t_data *data);
-int			is_valid_map(char *map_path, t_map *map);
-void		build_map(char *map_path, t_map *map);
-t_map		parse_map(char *map_path);
-t_point		transform_point(t_cam *cam, t_point p);
+void						init(t_data *d, int i, char **v);
+void						paint_pxl(t_canvas *canvas, int x, int y,
+								int color);
+void						register_events(t_data *data);
+t_map						parse_map(char *map_path);
+t_vectors					calculate_vectors(t_data *d);
+void						register_events(t_data *data);
+int							is_valid_map(char *map_path, t_map *map);
+void						build_map(char *map_path, t_map *map);
+t_map						parse_map(char *map_path);
+t_point						transform_point(t_cam *cam, t_point p);
+
 #endif

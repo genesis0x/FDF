@@ -6,7 +6,7 @@
 #    By: hahadiou <hahadiou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/02 17:11:56 by hahadiou          #+#    #+#              #
-#    Updated: 2023/01/02 18:36:02 by hahadiou         ###   ########.fr        #
+#    Updated: 2023/01/06 15:33:11 by hahadiou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRCS        = 		src/main.c \
 						src/put_pixel.c \
 						src/transform_ref.c \
 						src/utils.c \
+						src/event_hooks.c
 
 OBJS        = $(SRCS:.c=.o)
 
@@ -47,7 +48,7 @@ ${NAME}:	${OBJS}
 			@echo "$(GREEN)$(NAME) created[0m ✔️"
 
 run:
-			@clear && make re && ./fdf
+			@clear && make re &&  make clean && ./fdf
 
 clean:
 			@ ${RM} ${OBJS}

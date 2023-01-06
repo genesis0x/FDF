@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysalmi <ysalmi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hahadiou <hahadiou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 22:42:25 by hahadiou          #+#    #+#             */
-/*   Updated: 2023/01/05 13:02:37 by ysalmi           ###   ########.fr       */
+/*   Updated: 2023/01/06 16:30:36 by hahadiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	init_canvas(void *mlx, t_canvas *c)
 
 int	init_map(t_data *data)
 {
-	data->main.map_path = "maps/map.fdf"; //strdup(argv[1]);
+	data->main.map_path = "maps/map.fdf"; //strdup(av[1]);
 	data->main.map = parse_map(data->main.map_path);
 	if (data->main.map.coords)
 		return (0);
@@ -53,10 +53,10 @@ int	init_cam_coords(t_data *data)
 	return (0);
 }
 
-void	init(t_data *data, int argc, char **argv)
+void	init(t_data *data, int ac, char **av)
 {
-	(void)argv;
-	(void)argc;
+	(void)av;
+	(void)ac;
 	printf("init.\n");
 	if (init_map(data))
 	{
@@ -81,7 +81,7 @@ void	init(t_data *data, int argc, char **argv)
 	data->main.canvas.w = W;
 	data->main.canvas.h = H;
 	init_canvas(data->mlx, &data->main.canvas);
-	data->main.cam.tr = (t_point){.x = 0, .y = 10, .z = -12};
+	data->main.cam.tr = (t_point){.x = 0, .y = 10, .z = -10};
 	data->main.cam.ro = (t_point){.x = -M_PI_4, .y = 0, .z = 0};
 	printf("end init.\n");
 }

@@ -24,9 +24,9 @@ t_vectors	calculate_vectors(t_data *data)
 	s = (t_point){.x = sin(ro.x), .y = sin(ro.y), .z = sin(ro.z)};
 	v = (t_vectors){
 		.ex.x = c.y * c.x, .ex.y = -c.y * s.x, .ex.z = s.y, .ey.x = c.z * s.x
-		+ s.z * s.y * c.x, .ey.y = c.z * c.x - s.z * s.y * s.x, .ey.z = -s.z
-		* s.y, .ez.x = s.z * s.x - c.z * s.y * c.x, .ez.y = s.z * c.x + c.z
-		* s.y * s.x, .ez.z = c.z * c.y};
+			+ s.z * s.y * c.x, .ey.y = c.z * c.x - s.z * s.y * s.x, .ey.z = -s.z
+			* s.y, .ez.x = s.z * s.x - c.z * s.y * c.x, .ez.y = s.z * c.x + c.z
+			* s.y * s.x, .ez.z = c.z * c.y};
 	return (v);
 }
 
