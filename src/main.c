@@ -6,7 +6,7 @@
 /*   By: hahadiou <hahadiou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 19:06:10 by hahadiou          #+#    #+#             */
-/*   Updated: 2023/01/06 16:28:04 by hahadiou         ###   ########.fr       */
+/*   Updated: 2023/01/13 17:37:10 by hahadiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,52 +35,54 @@ void	calc_transformed_coords(t_data *data)
 	}
 }
 
-void	plot(t_data *d)
+void	plot(t_data *data)
 {
 	size_t	i;
 	size_t	j;
 
-	double ru, xx, yy, zz, dst, x, y;
+	double ru, px, py, pz, dst, x, y;
 	int xoff, yoff;
-	xoff = d->main.canvas.w / 2;
-	yoff = d->main.canvas.h / 2;
-	dst = d->main.cam.d;
-	printf("dist: %f\n", dst);
+	xoff = data->main.canvas.w / 2;
+	yoff = data->main.canvas.h / 2;
+	dst = data->main.cam.d;
 	x = -1;
-	while (++x < d->main.canvas.w)
-		paint_pxl(&d->main.canvas, x, yoff, 0x00ffffff);
+	while (++x < data->main.canvas.w)
+		paint_pxl(&data->main.canvas, x, yoff, 0x000000);
 	j = -1;
-	while (++j < d->main.map.h)
+	while (++j < data->main.map.h)
 	{
 		i = -1;
-		while (++i < d->main.map.w)
+		while (++i < data->main.map.w)
 		{
-			xx = d->main.cam.coords[j][i].x;
-			yy = d->main.cam.coords[j][i].y;
-			zz = d->main.cam.coords[j][i].z;
-			x = dst * xx / yy;
-			ru = xx * xx + yy * yy;
-			y = (dst * dst + x * x) * zz * zz / ru;
-			y = (1 * (zz > 0) - 1 * (zz < 0)) * sqrt(y);
-			printf("(%zu, %zu) -> (%10f, %10f, %10f) -> (%10f, %10f)\n", i, j,
-					xx, yy, zz, x, y);
+			px = data->main.cam.coords[j][i].x;
+			py = data->main.cam.coords[j][i].y;
+			pz = data->main.cam.coords[j][i].z;
+			x = dst * px / py;
+			ru = px * px + py * py;
+			y = (dst * dst + x * x) * pz * pz / ru;
+			y = (1 * (pz > 0) - 1 * (pz < 0)) * sqrt(y);
+			//printf("(%zu, %zu) -> (%10f, %10f, %10f) -> (%10f, %10f)\n", i, j,
+			//		px, py, pz, x, y);
 			//int i = 0;
 			//while (i <= 3 * y)
 			//{
 			if (x + x + xoff >= 0 && x + x + xoff < xoff + xoff && yoff - y >= 0
 				&& yoff - y < yoff + yoff)
-				paint_pxl(&d->main.canvas, 2 * x + xoff, yoff - y, 0x00ffffff);
+				paint_pxl(&data->main.canvas, 2 * x + xoff, yoff - y,
+						0x00ffffff);
 			//i++;
 			//}
 		}
 	}
-	mlx_put_image_to_window(d->mlx, d->win, d->main.canvas.img, 0, 0);
-	mlx_loop(d->mlx);
+	mlx_put_image_to_window(data->mlx, data->win, data->main.canvas.img, 0, 0);
+	mlx_loop(data->mlx);
 }
 
 void	start_fdf(t_data *data)
 {
-	printf("starting...\n");
+	for (size_t i = 0; i < data->main.canvas.w; i++)
+		for (size_t j = 0; j < data->main.canvas.h; j++)
+			paint_pxl(&data->main.canvas, i, j, 0x808080);
 	data->main.cam.v = calculate_vectors(data);
 	calc_transformed_coords(data);
 	plot(data);

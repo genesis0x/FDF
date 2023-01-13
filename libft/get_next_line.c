@@ -6,11 +6,11 @@
 /*   By: hahadiou <hahadiou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 21:41:47 by hahadiou          #+#    #+#             */
-/*   Updated: 2022/12/31 16:41:46 by hahadiou         ###   ########.fr       */
+/*   Updated: 2023/01/13 14:34:15 by hahadiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../inc/libft.h"
 
 static char	*ft_realloc(t_line *line)
 {

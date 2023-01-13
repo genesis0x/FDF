@@ -6,14 +6,14 @@
 /*   By: hahadiou <hahadiou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 14:25:35 by hahadiou          #+#    #+#             */
-/*   Updated: 2023/01/06 16:32:03 by hahadiou         ###   ########.fr       */
+/*   Updated: 2023/01/13 15:44:38 by hahadiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# include "../libft/libft.h"
+# include "libft.h"
 # include "config.h"
 # include <fcntl.h>
 # include <math.h>
@@ -22,6 +22,11 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
+
+# define K_ESC 53
+# define K_A 0
+# define K_S 1
+# define K_D 2
 
 enum
 {
@@ -105,7 +110,8 @@ struct						s_data
 	t_main					main;
 };
 
-void						init(t_data *d, int i, char **v);
+void						init(t_data *d, int ac, char **av);
+void						start_fdf(t_data *data);
 void						paint_pxl(t_canvas *canvas, int x, int y,
 								int color);
 void						register_events(t_data *data);
@@ -116,5 +122,6 @@ int							is_valid_map(char *map_path, t_map *map);
 void						build_map(char *map_path, t_map *map);
 t_map						parse_map(char *map_path);
 t_point						transform_point(t_cam *cam, t_point p);
+void 						draw_line(void *mlx, void *win, int x1, int y1, int x2, int y2);
 
 #endif

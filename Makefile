@@ -5,59 +5,68 @@
 #                                                     +:+ +:+         +:+      #
 #    By: hahadiou <hahadiou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/01/02 17:11:56 by hahadiou          #+#    #+#              #
-#    Updated: 2023/01/06 15:33:11 by hahadiou         ###   ########.fr        #
+#    Created: 2023/01/11 11:14:53 by hahadiou          #+#    #+#              #
+#    Updated: 2023/01/13 15:37:21 by hahadiou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME        =  fdf
+CC		= cc
+FLAGS	= -Wall -Wextra -Werror
 
-CC        = gcc
-FLAGS    = -Wall -Wextra -Werror -Iinc -Ilibft 
+NAME	= fdf
 
-inc			= ./inc/fdf.h
+INC	= inc
+LIBFT_PATH	= libft/
+SRC_PATH	= src/
+OBJ_PATH	= obj/
 
-LIBFT		= libft/libft.a
+SRCS = event_hooks.c \
+		init.c \
+		main.c \
+		parse_map.c \
+		put_pixel.c \
+		transform_ref.c \
+		utils.c \
+		draw.c
+		
+SRC		= $(addprefix $(SRC_PATH)/,$(SRCS))
+OBJ		= $(addprefix $(OBJ_PATH)/,$(SRCS:.c=.o))
 
-SRCS        = 		src/main.c \
-						src/init.c \
-						src/parse_map.c \
-						src/put_pixel.c \
-						src/transform_ref.c \
-						src/utils.c \
-						src/event_hooks.c
+NOC		= \033[0m
+RED		= \033[1;31m
+GREEN	= \033[1;32m
+YELLOW	= \033[1;33m
+BLUE	= \033[1;34m
+WHITE	= \033[1;37m
 
-OBJS        = $(SRCS:.c=.o)
+all: $(NAME)
 
-.c.o: 
-	@${CC} ${FLAGS} -c $< -o ${<:.c=.o}
 
-CLR_RMV		= \033[0m
-RED		    = \033[1;31m
-GREEN		= \033[1;32m
-YELLOW		= \033[1;33m
-BLUE		= \033[1;34m
-CYAN 		= \033[1;36m
-RM		    = rm -f
+$(NAME): $(OBJ)
+	@echo "$(YELLOW)Compiling Libft...$(NOC)"
+	@make -sC $(LIBFT_PATH)
+	@echo "$(YELLOW)Compiling FDF...$(NOC)"
+	@$(CC) $(FLAGS) -L $(LIBFT_PATH) -lmlx -framework OpenGL -framework AppKit -o $@ $^ -lft
+	@echo "$(GREEN)$@$(NOC)"
 
-all:		${NAME}
+$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c $(INC)/$(NAME).h
+	@mkdir -p obj
+	@$(CC) $(FLAGS) -I$(INC) -c -o $@ $<
 
-${NAME}:	${OBJS}
-			@echo "$(GREEN)Compilation ${CLR_RMV}of ${YELLOW}$(NAME) ${CLR_RMV}..."
-			@${CC} ${OBJS}  ${LIBFT} -lmlx -framework OpenGL -framework AppKit -o ${NAME}
-			@echo "$(GREEN)$(NAME) created[0m ✔️"
-
-run:
-			@clear && make re &&  make clean && ./fdf
-
+run :
+		make re && ./fdf
 clean:
-			@ ${RM} ${OBJS}
-			@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)OBJS ✔️"
+	@echo "$(RED)Deleting FDF OBJS ✔️ $(NOC)"
+	@make clean -sC $(LIBFT_PATH)
+	@rm -rf $(OBJ_PATH)
+	@rm -rf $(OBJB_PATH)
 
-fclean:		clean
-			@ ${RM} ${NAME}
-			@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)Binary ✔️"
+fclean: clean
+	@echo "$(RED)Deleting FDF Binary$(NOC)"
+	@make fclean -sC $(LIBFT_PATH)
+	@rm -f $(NAME) ${NAMEB}
 
-re:			fclean all
+re: fclean all
 
-.PHONY:		all clean fclean re
+
+.PHONY:	all clean fclean re  

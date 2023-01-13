@@ -3,14 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hahadiou <hahadiou@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hahadiou <hahadiou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 19:59:22 by hahadiou          #+#    #+#             */
-/*   Updated: 2022/10/11 22:43:49 by hahadiou         ###   ########.fr       */
+/*   Updated: 2023/01/13 17:42:55 by hahadiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../inc/libft.h"
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	size_t	i;
+	char	*str;
+
+	i = -1;
+	if (!s)
+		return (0);
+	if (start >= ft_strlen(s))
+	{
+		return (ft_calloc(1, 1));
+	}
+	str = malloc(len + 1);
+	if (!str)
+		return (0);
+	while (++i < len)
+		str[i] = s[start + i];
+	str[i] = '\0';
+	return (str);
+}
 
 static int	ft_countword(char const *s, char c)
 {
@@ -49,9 +70,9 @@ char	**ft_split(char const *s, char c)
 			++s;
 		if (*s)
 		{
-			word_len = ft_strchr(s, c) - s;
-			if (!ft_strchr(s, c))
-				word_len = ft_strlen(s);
+			word_len = strchr(s, c) - s;
+			if (!strchr(s, c))
+				word_len = strlen(s);
 			strs[i++] = ft_substr(s, 0, word_len);
 			s += word_len;
 		}
