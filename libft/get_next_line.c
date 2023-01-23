@@ -6,11 +6,20 @@
 /*   By: hahadiou <hahadiou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 21:41:47 by hahadiou          #+#    #+#             */
-/*   Updated: 2023/01/13 14:34:15 by hahadiou         ###   ########.fr       */
+/*   Updated: 2023/01/21 15:03:10 by hahadiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/libft.h"
+
+static void	free_buffer(t_read *res)
+{
+	if (res->buf != NULL)
+	{
+		free(res->buf);
+		res->buf = NULL;
+	}
+}
 
 static char	*ft_realloc(t_line *line)
 {
@@ -22,7 +31,7 @@ static char	*ft_realloc(t_line *line)
 	if (line->buf)
 	{
 		if (new_buf)
-			ft_memcpy(new_buf, line->buf, line->size);
+			memcpy(new_buf, line->buf, line->size);
 		free(line->buf);
 	}
 	line->buf = new_buf;

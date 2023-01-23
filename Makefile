@@ -6,7 +6,7 @@
 #    By: hahadiou <hahadiou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/11 11:14:53 by hahadiou          #+#    #+#              #
-#    Updated: 2023/01/13 15:37:21 by hahadiou         ###   ########.fr        #
+#    Updated: 2023/01/21 18:52:39 by hahadiou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,9 +16,9 @@ FLAGS	= -Wall -Wextra -Werror
 NAME	= fdf
 
 INC	= inc
-LIBFT_PATH	= libft/
-SRC_PATH	= src/
-OBJ_PATH	= obj/
+LIBFT_PATH	= libft
+SRC_PATH	= src
+OBJ_PATH	= obj
 
 SRCS = event_hooks.c \
 		init.c \
@@ -27,7 +27,7 @@ SRCS = event_hooks.c \
 		put_pixel.c \
 		transform_ref.c \
 		utils.c \
-		draw.c
+		#draw.c
 		
 SRC		= $(addprefix $(SRC_PATH)/,$(SRCS))
 OBJ		= $(addprefix $(OBJ_PATH)/,$(SRCS:.c=.o))

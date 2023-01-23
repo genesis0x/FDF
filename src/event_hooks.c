@@ -6,7 +6,7 @@
 /*   By: hahadiou <hahadiou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 15:58:23 by hahadiou          #+#    #+#             */
-/*   Updated: 2023/01/13 15:55:27 by hahadiou         ###   ########.fr       */
+/*   Updated: 2023/01/21 19:48:25 by hahadiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,29 @@ int	key_handler(int key, t_data *data)
 	}
 	if (key == K_S) //rotation
 	{
-		data->main.cam.ro.z += 0.05;
-		printf("angle => %f\n", data->main.cam.ro.z);
+		data->main.cam.ro.y += 0.05;
+		printf("angle => %f\n", data->main.cam.ro.y);
 		start_fdf(data);
 	}
-	if (key == K_D) // x translation 
+	if (key == K_D) // x translation
 	{
 		data->main.cam.tr.x += 1;
 		start_fdf(data);
 	}
 	return (0);
 }
+
+/*int mouse_hook(int key, t_data *data)
+{
+	printf("key: %d\n", key);
+	if (key == 1)
+	{
+		data->main.cam.ro.z += 0.005;
+		printf("angle => %f\n", data->main.cam.ro.z);
+		start_fdf(data);
+	}
+	return (0);
+}*/
 
 int	close_window(t_data *data)
 {
@@ -48,6 +60,7 @@ int	close_window(t_data *data)
 
 void	register_events(t_data *data)
 {
+	//mlx_mouse_hook(data->win, mouse_hook, &data);
 	mlx_hook(data->win, ON_KEYDOWN, 0, key_handler, data);
 	mlx_hook(data->win, ON_DESTROY, 0, close_window, data);
 }

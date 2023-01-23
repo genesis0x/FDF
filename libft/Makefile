@@ -13,7 +13,6 @@ SRCS        =      ft_split.c \
                           ft_strlen.c \
                           ft_substr.c \
                           get_next_line.c \
-                          get_next_line_utils.c \
                           
 OBJS        = $(SRCS:.c=.o)
 

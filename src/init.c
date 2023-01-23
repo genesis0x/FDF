@@ -6,17 +6,16 @@
 /*   By: hahadiou <hahadiou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 22:42:25 by hahadiou          #+#    #+#             */
-/*   Updated: 2023/01/13 17:23:57 by hahadiou         ###   ########.fr       */
+/*   Updated: 2023/01/21 19:53:34 by hahadiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
-#include <math.h>
 
 void	init_canvas(void *mlx, t_canvas *c)
 {
 	c->img = mlx_new_image(mlx, c->w, c->h);
-	// check if imgage is not NULL
+	// check if image is not NULL
 	c->addr = mlx_get_data_addr(c->img, &c->bpp, &c->line_len, &c->endian);
 }
 
@@ -66,8 +65,8 @@ void	init(t_data *data, int ac, char **av)
 	}
 	if (init_cam_coords(data))
 	{
-		// free map data->main.map?
-		// printf "ALLOCATION ERROR\n";
+		//free(map)
+		//printf("Allocation Failed\n");
 		exit(1);
 	}
 	data->mlx = mlx_init();
@@ -82,7 +81,7 @@ void	init(t_data *data, int ac, char **av)
 	data->main.canvas.w = W;
 	data->main.canvas.h = H;
 	init_canvas(data->mlx, &data->main.canvas);
-	data->main.cam.tr = (t_point){.x = 0, .y = 20, .z = 300};
-	data->main.cam.ro = (t_point){.x = 0, .y = 0, .z = 0};
+	data->main.cam.tr = (t_point){.x = 2, .y = 1, .z = -2};
+	data->main.cam.ro = (t_point){.x = 0, .y =  M_PI_2, .z = 0};
 	printf("end init.\n");
 }

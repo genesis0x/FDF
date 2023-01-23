@@ -6,7 +6,7 @@
 /*   By: hahadiou <hahadiou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:12:52 by hahadiou          #+#    #+#             */
-/*   Updated: 2023/01/13 16:20:29 by hahadiou         ###   ########.fr       */
+/*   Updated: 2023/01/14 14:52:54 by hahadiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ int	is_valid_map(char *map_path, t_map *map)
 		map->h++;
 		free(line);
 		line = get_next_line(fd);
-		if (line && strlen(line) != map->w + 1)
+		/*if (line && strlen(line) != map->w + 1)
 		{
 			free(line);
 			return (0);
-		}
+		}*/
 	}
 	close(fd);
 	return (1);

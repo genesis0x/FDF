@@ -6,7 +6,7 @@
 /*   By: hahadiou <hahadiou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 18:38:40 by hahadiou          #+#    #+#             */
-/*   Updated: 2023/01/13 17:40:57 by hahadiou         ###   ########.fr       */
+/*   Updated: 2023/01/20 15:47:28 by hahadiou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 # include <fcntl.h>
 # include <stdarg.h>
 # include <stdio.h>
+# include <stdio.h>
 # include <stdlib.h>
+# include <string.h>
 # include <unistd.h>
-#include <stdio.h>
-#include <string.h>
 
 # ifdef BUFFER_SIZE
 #  if BUFFER_SIZE < 0
@@ -51,7 +51,6 @@ struct					s_list
 
 char					*get_next_line(int fd);
 void					*ft_memcpy(void *dst, const void *src, size_t n);
-void					free_buffer(t_read *prb);
 size_t					ft_strlen(const char *s);
 size_t					ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t					ft_strlcat(char *dst, const char *src, size_t dstsize);
