@@ -17,7 +17,7 @@
 # include "libft.h"
 # include <fcntl.h>
 # include <math.h>
-# include <mlx.h>
+# include "../minilibx-linux/mlx.h"
 # include <stddef.h>
 # include <stdio.h>
 # include <stdlib.h>

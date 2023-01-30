@@ -11,6 +11,7 @@
 # **************************************************************************** #
 
 CC		= cc
+
 FLAGS	= -Wall -Wextra -Werror
 
 NAME	= fdf
@@ -23,10 +24,11 @@ OBJ_PATH	= obj
 SRCS = event_hooks.c \
 		init.c \
 		main.c \
-		parse_map.c \
 		put_pixel.c \
 		transform_ref.c \
 		utils.c \
+		parse_map.c \
+		get_next_line.c \
 		#draw.c
 		
 SRC		= $(addprefix $(SRC_PATH)/,$(SRCS))
@@ -46,12 +48,12 @@ $(NAME): $(OBJ)
 	@echo "$(YELLOW)Compiling Libft...$(NOC)"
 	@make -sC $(LIBFT_PATH)
 	@echo "$(YELLOW)Compiling FDF...$(NOC)"
-	@$(CC) $(FLAGS) -L $(LIBFT_PATH) -lmlx -framework OpenGL -framework AppKit -o $@ $^ -lft
+	@$(CC) $(OBJ) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 	@echo "$(GREEN)$@$(NOC)"
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c $(INC)/$(NAME).h
 	@mkdir -p obj
-	@$(CC) $(FLAGS) -I$(INC) -c -o $@ $<
+	@$(CC) -Wall -Wextra -Werror -I/usr/include -Imlx_linux -O3 -c $< -o $@
 
 run :
 		make re && ./fdf

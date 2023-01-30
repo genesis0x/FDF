@@ -18,94 +18,59 @@ void	init_canvas(void *mlx, t_canvas *canvas)
 	canvas->addr = mlx_get_data_addr(canvas->img, &canvas->bpp, &canvas->line_len, &canvas->endian);
 }
 
-void	draw_line(t_data *data, int x1, int y1, int x2, int y2, int width, int height)
+static void init_vars(t_point *p1, t_point *p2, t_point *dir, t_point *dis)
 {
-	int	x1_in_range;
-	int	y1_in_range;
-	int	x2_in_range;
-	int	y2_in_range;
-	int dx;
-	int dy;
+	p1.x = 0 * (begin.x < 0) + ((W - 1) * (begin.x >= W) + begin.x * (begin.x <= W));
+	p1.y = 0 * (begin.y < 0) + ((H - 1) * (begin.y >= H) + begin.y * (begin.y <= H));
+	p2.x = 0 * (end.x < 0) + ((W - 1) * (end.x >= W) + end.x * (end.x <= W));
+	p2.y = 0 * (end.y < 0) + ((H - 1) * (end.y >= H) + end.y * (end.y <= H));
+	dir.x = 1 * (p1.x < p2.x) + -1 * (p1.x > p2.x);
+	dir.y = 1 * (p1.y < p2.y) + -1 * (p1.y > p2.y);
+	dis.x = abs(p2.x - p1.x);
+	dis.y = abs(p2.y - p1.y);
+}
+
+void	draw_line(t_data *data, t_point begin, t_point end)
+{
+	t_point p1;
+	t_point p2;
+	t_point dir;
+	t_point dis;
 	int	err;
 	int e2;
-	int sx;
-	int sy;
 
 	init_canvas(data->mlx, &data->main.canvas);
-	x1_in_range = 0 * (x1 < 0) + ((width - 1) * (x1 >= width) + x1 * (x1 <= width));
-	y1_in_range = 0 * (y1 < 0) + ((height - 1) * (y1 >= height) + y1 * (y1 <= height));
-	x2_in_range = 0 * (x2 < 0) + ((width - 1) * (x2 >= width) + x2 * (x2 <= width));
-	y2_in_range = 0 * (y2 < 0) + ((height - 1) * (y2 >= height) + y2 * (y2 <= height));
-	
-	sx = 1 * (x1_in_range < x2_in_range) + -1 * (x1_in_range > x2_in_range);
-	sy = 1 * (y1_in_range < y2_in_range) + -1 * (y1_in_range > y2_in_range);
-	
-	dx = abs(x2_in_range - x1_in_range);
-	dy = abs(y2_in_range - y1_in_range);
-	err = (dx * (dx > dy) + -dy * (dx < dy)) / 2;
-	
+	init_vars(&p1, &p2, &dir, &dis);
+	// p1.x = 0 * (begin.x < 0) + ((W - 1) * (begin.x >= W) + begin.x * (begin.x <= W));
+	// p1.y = 0 * (begin.y < 0) + ((H - 1) * (begin.y >= H) + begin.y * (begin.y <= H));
+	// p2.x = 0 * (end.x < 0) + ((W - 1) * (end.x >= W) + end.x * (end.x <= W));
+	// p2.y = 0 * (end.y < 0) + ((H - 1) * (end.y >= H) + end.y * (end.y <= H));
+	// dir.x = 1 * (p1.x < p2.x) + -1 * (p1.x > p2.x);
+	// dir.y = 1 * (p1.y < p2.y) + -1 * (p1.y > p2.y);
+	// dis.x = abs(p2.x - p1.x);
+	// dis.y = abs(p2.y - p1.y);
+	err = (dis.x * (dis.x > dis.y) + -dis.y * (dis.x < dis.y)) / 2;
 	while (1)
 	{
-		paint_pxl(&data->main.canvas, x1_in_range, y1_in_range, 0xFFFFFF);
-		if (x1_in_range == x2_in_range && y1_in_range == y2_in_range)
+		paint_pxl(&data->main.canvas, p1.x, p1.y, 0xFFFFFF);
+		if (p1.x == p2.x && p1.y == p2.y)
 			break ;
 		e2 = err;
-		if (e2 > -dx)
+		if (e2 > -dis.x)
 		{
-			err -= dy;
-			x1_in_range += sx;
+			err -= dis.y;
+			p1.x += dir.x;
 		}
-		if (e2 < dy)
+		if (e2 < dis.y)
 		{
-			err += dx;
-			y1_in_range += sy;
+			err += dis.x;
+			p1.y += dir.y;
 		}
 	}
 	mlx_put_image_to_window(data->mlx, data->win, data->main.canvas.img, 0, 0);
 	mlx_loop(data->mlx);
 }
 
-/*void	draw_line(t_data *data, int x1, int y1, int x2, int y2, int width,
-		int height)
-{
-	int	dx;
-	int	sx;
-	int	dy;
-	int	sy;
-	int	err;
-	int	e2;
-
-	x1 = 0 * (x1 < 0) + x1 * (x1 > 0);
-	x1 = (width - 1) * (x1 >= width) + x1 * (x1 <= width);
-	y1 = 0 * (y1 < 0) + y1 * (x1 > 0);
-	y1 = (height - 1) * (y1 >= height) + y1 * (y1 <= height);
-	x2 = 0 * (x2 < 0) + x2 * (x2 > 0);
-	x2 = (width - 1) * (x2 >= width) + x2 * (x2 <= width);
-	y2 = 0 * (y2 < 0) + y2 * (y2 > 0);
-	y2 = (height - 1) * (y2 >= height) + y2 * (y2 <= height);
-	dx = abs(x2 - x1);
-	dy = abs(y2 - y1);
-	sx = 1 * (x1 < 2) + -1 * (x1 > 2);
-	sy = 1 * (y1 < 2) + -1 * (y1 > 2);
-	err = (dx * (dx > dy) + -dy * (dx < dy)) / 2;
-	while (1)
-	{
-		mlx_pixel_put(data->mlx, data->win, x1, y1, 0xFFFFFF);
-		if (x1 == x2 && y1 == y2)
-			break ;
-		e2 = err;
-		if (e2 > -dx)
-		{
-			err -= dy;
-			x1 += sx;
-		}
-		if (e2 < dy)
-		{
-			err += dx;
-			y1 += sy;
-		}
-	}
-}*/
 
 int	key_handler(int key, t_data *data)
 {
